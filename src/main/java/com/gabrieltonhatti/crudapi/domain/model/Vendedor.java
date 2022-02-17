@@ -18,6 +18,7 @@ public class Vendedor {
     private Long id;
 
     private String nome;
+
     private BigDecimal totalVendas;
 
     @Column(name = "media_vendas_diarias")

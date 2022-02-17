@@ -2,6 +2,7 @@ package com.gabrieltonhatti.crudapi.domain.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -18,6 +19,8 @@ public class Venda {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @CreationTimestamp
+    @Column(columnDefinition = "datetime")
     private LocalDateTime dataVenda;
 
     private BigDecimal valor;
