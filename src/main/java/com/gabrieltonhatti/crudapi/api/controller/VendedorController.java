@@ -48,15 +48,7 @@ public class VendedorController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         vendedorService.delete(id);
-        Message message = createMessage("Vendedor excluído com sucesso", 200).build();
-        return ResponseEntity.ok(message);
+        return ResponseEntity.noContent().build();
     }
 
-    private Message.MessageBuilder createMessage(String message, Integer status) {
-        return Message
-                .builder()
-                .message(message)
-                .status(status)
-                .date(LocalDateTime.now());
-    }
 }
