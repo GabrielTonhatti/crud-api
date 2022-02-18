@@ -20,7 +20,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
             "Tente novamente e se o problema persistir, entre em contato com o administrador do sistema";
 
 
-    @ExceptionHandler(EmptyResultDataAccessException.class)
+    @ExceptionHandler(VendedorException.class)
     public ResponseEntity<?> handleVendedor(VendedorException ex, WebRequest request) {
         HttpStatus status = HttpStatus.BAD_REQUEST;
         MessageType messageType = MessageType.RECURSO_NAO_ENCONTRADA;
@@ -41,7 +41,6 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
                     .timestamp(LocalDateTime.now())
                     .title(status.getReasonPhrase())
                     .status(status.value())
-                    .message(MSG_ERRO_GENERICA_USUARIO_FINAL)
                     .build();
         } else if(body instanceof String) {
             body = Message
@@ -49,7 +48,6 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
                     .timestamp(LocalDateTime.now())
                     .title((String) body)
                     .status(status.value())
-                    .message(MSG_ERRO_GENERICA_USUARIO_FINAL)
                     .build();
         }
 
