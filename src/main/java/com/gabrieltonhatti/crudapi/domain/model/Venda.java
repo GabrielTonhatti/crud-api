@@ -10,6 +10,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.util.Date;
 
 @Data
 @Entity
@@ -23,8 +25,8 @@ public class Venda {
     private Long id;
 
 //    @CreationTimestamp
-    @Column(columnDefinition = "datetime")
-    private LocalDateTime dataVenda;
+//    @Column(columnDefinition = "datetime")
+    private Date dataVenda;
 
     private BigDecimal valor;
 

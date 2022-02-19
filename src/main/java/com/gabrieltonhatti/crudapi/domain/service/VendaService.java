@@ -4,6 +4,7 @@ import com.gabrieltonhatti.crudapi.domain.exception.VendaException;
 import com.gabrieltonhatti.crudapi.domain.model.Venda;
 import com.gabrieltonhatti.crudapi.domain.model.Vendedor;
 import com.gabrieltonhatti.crudapi.domain.repository.VendaRepository;
+import com.gabrieltonhatti.crudapi.domain.repository.VendedorRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;

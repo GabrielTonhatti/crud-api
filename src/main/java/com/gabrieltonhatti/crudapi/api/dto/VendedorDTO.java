@@ -1,13 +1,17 @@
 package com.gabrieltonhatti.crudapi.api.dto;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import com.gabrieltonhatti.crudapi.domain.model.Vendedor;
+import lombok.*;
+import org.springframework.data.domain.Page;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class VendedorDTO implements Serializable {
 
@@ -16,4 +20,7 @@ public class VendedorDTO implements Serializable {
     private BigDecimal totalVendas;
     private BigDecimal mediaVendas;
 
+//    public VendedorDTO(Page<Vendedor> vendedores) {
+//
+//    }
 }

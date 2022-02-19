@@ -1,7 +1,6 @@
 package com.gabrieltonhatti.crudapi.domain.repository;
 
 import com.gabrieltonhatti.crudapi.domain.model.Venda;
-import com.gabrieltonhatti.crudapi.domain.model.Vendedor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,5 +1,6 @@
 package com.gabrieltonhatti.crudapi.domain.service;
 
+import com.gabrieltonhatti.crudapi.api.dto.VendedorDTO;
 import com.gabrieltonhatti.crudapi.domain.exception.VendedorException;
 import com.gabrieltonhatti.crudapi.domain.model.Vendedor;
 import com.gabrieltonhatti.crudapi.domain.repository.VendedorRepository;
@@ -10,6 +11,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @AllArgsConstructor
 public class VendedorService {
@@ -18,11 +22,20 @@ public class VendedorService {
 
     @Transactional(readOnly = true)
     public Page<Vendedor> findAll(Pageable page) {
+        Page<Vendedor> vendedores = vendedorRepository.findAll(page);
+        vendedores.map(vendedor -> {
+            System.out.println(vendedor);
+
+            return null;
+        });
         return vendedorRepository.findAll(page);
     }
 
     @Transactional
     public Vendedor save(Vendedor vendedor) {
+        System.out.println(vendedorRepository.findAVG());
+        vendedor.setMediaVendas(vendedorRepository.findAVG());
+
         return vendedorRepository.save(vendedor);
     }
 

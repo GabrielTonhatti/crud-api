@@ -1,5 +1,6 @@
 package com.gabrieltonhatti.crudapi.api.controller;
 
+import com.gabrieltonhatti.crudapi.api.dto.VendedorDTO;
 import com.gabrieltonhatti.crudapi.domain.exception.VendedorException;
 import com.gabrieltonhatti.crudapi.domain.model.Vendedor;
 import com.gabrieltonhatti.crudapi.domain.service.VendedorService;

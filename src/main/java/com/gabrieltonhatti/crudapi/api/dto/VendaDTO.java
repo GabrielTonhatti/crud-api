@@ -15,11 +15,8 @@ import java.util.Date;
 public class VendaDTO implements Serializable {
 
     private Long id;
-
     private Date dataVenda;
-
     private BigDecimal valor;
-
     @JsonIgnoreProperties(value = {"totalVendas", "mediaVendas"})
     private VendedorDTO vendedorDTO;
 
