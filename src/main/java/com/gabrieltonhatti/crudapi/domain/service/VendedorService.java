@@ -1,9 +1,11 @@
 package com.gabrieltonhatti.crudapi.domain.service;
 
+import com.gabrieltonhatti.crudapi.api.dto.VendedorDTO;
 import com.gabrieltonhatti.crudapi.domain.exception.VendedorException;
 import com.gabrieltonhatti.crudapi.domain.model.Vendedor;
+import com.gabrieltonhatti.crudapi.domain.repository.VendaRepository;
 import com.gabrieltonhatti.crudapi.domain.repository.VendedorRepository;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,19 +13,27 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@AllArgsConstructor
+//@AllArgsConstructor
 public class VendedorService {
 
+    @Autowired
     private VendedorRepository vendedorRepository;
+    @Autowired
+    private VendaRepository vendaRepository;
 
     @Transactional(readOnly = true)
-    public Page<Vendedor> findAll(Pageable page) {
-        return vendedorRepository.findAll(page);
+    public Page<VendedorDTO> findAllPageable(Pageable page) {
+        return vendedorRepository.findAllPageable(page);
+    }
+
+    @Transactional(readOnly = true)
+    public VendedorDTO findById(Long id) {
+        return vendedorRepository.calculateAVG(id);
     }
 
     @Transactional
-    public Vendedor save(Vendedor vendedor) {
-        return vendedorRepository.save(vendedor);
+    public VendedorDTO save(Vendedor vendedor) {
+        return new VendedorDTO(vendedorRepository.save(vendedor));
     }
 
     @Transactional

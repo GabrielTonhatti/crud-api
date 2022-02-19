@@ -1,5 +1,6 @@
 package com.gabrieltonhatti.crudapi.api.controller;
 
+import com.gabrieltonhatti.crudapi.api.dto.VendaDTO;
 import com.gabrieltonhatti.crudapi.domain.model.Venda;
 import com.gabrieltonhatti.crudapi.domain.service.VendaService;
 import lombok.AllArgsConstructor;
@@ -17,13 +18,13 @@ public class VendaController {
     private VendaService vendaService;
 
     @GetMapping
-    public ResponseEntity<Page<Venda>> findAll(Pageable page) {
+    public ResponseEntity<Page<VendaDTO>> findAll(Pageable page) {
         return ResponseEntity.ok(vendaService.findAll(page));
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Venda> save(@RequestBody Venda venda) {
+    public ResponseEntity<VendaDTO> save(@RequestBody Venda venda) {
         return ResponseEntity.ok(vendaService.save(venda));
     }
 

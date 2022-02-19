@@ -1,10 +1,12 @@
 package com.gabrieltonhatti.crudapi.domain.service;
 
+import com.gabrieltonhatti.crudapi.api.dto.VendaDTO;
 import com.gabrieltonhatti.crudapi.domain.exception.VendaException;
 import com.gabrieltonhatti.crudapi.domain.model.Venda;
 import com.gabrieltonhatti.crudapi.domain.model.Vendedor;
 import com.gabrieltonhatti.crudapi.domain.repository.VendaRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,27 +14,30 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@AllArgsConstructor
+//@AllArgsConstructor
 public class VendaService {
 
+    @Autowired
     private VendaRepository vendaRepository;
+    @Autowired
     private VendedorService vendedorService;
 
     @Transactional(readOnly = true)
-    public Page<Venda> findAll(Pageable page) {
-        return vendaRepository.findAll(page);
+    public Page<VendaDTO> findAll(Pageable page) {
+        Page<Venda> vendas = vendaRepository.findAll(page);
+        return vendas.map(VendaDTO::new);
     }
 
     @Transactional
-    public Venda save(Venda venda) {
+    public VendaDTO save(Venda venda) {
 
         try {
             Vendedor vendedor = vendedorService.findOrThrowException(venda.getVendedor().getId());
-
             venda.getVendedor().setNome(vendedor.getNome());
+            vendaRepository.save(venda);
 
             System.out.println(venda);
-            return vendaRepository.save(venda);
+            return new VendaDTO(venda);
         } catch (EmptyResultDataAccessException e) {
             throw new VendaException(venda.getId());
         }
