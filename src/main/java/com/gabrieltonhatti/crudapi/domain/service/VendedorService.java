@@ -4,13 +4,11 @@ import com.gabrieltonhatti.crudapi.domain.exception.VendedorException;
 import com.gabrieltonhatti.crudapi.domain.model.Vendedor;
 import com.gabrieltonhatti.crudapi.domain.repository.VendedorRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.BeanUtils;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -30,7 +28,11 @@ public class VendedorService {
 
     @Transactional
     public void delete(Long id) {
-        vendedorRepository.deleteById(id);
+        try {
+            vendedorRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new VendedorException(id);
+        }
     }
 
     public Vendedor findOrThrowException(Long id) {

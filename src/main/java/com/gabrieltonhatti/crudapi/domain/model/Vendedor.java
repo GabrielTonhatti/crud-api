@@ -1,5 +1,6 @@
 package com.gabrieltonhatti.crudapi.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

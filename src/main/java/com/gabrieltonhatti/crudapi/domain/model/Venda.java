@@ -1,7 +1,10 @@
 package com.gabrieltonhatti.crudapi.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.apache.tomcat.jni.Local;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -19,7 +22,7 @@ public class Venda {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @CreationTimestamp
+//    @CreationTimestamp
     @Column(columnDefinition = "datetime")
     private LocalDateTime dataVenda;
 
@@ -27,7 +30,7 @@ public class Venda {
 
     @ManyToOne
     @JoinColumn(name = "vendedor_id")
+    @JsonIgnoreProperties(value = {"totalVendas", "mediaVendas"})
     private Vendedor vendedor;
 
-    private String vendedorNome;
 }

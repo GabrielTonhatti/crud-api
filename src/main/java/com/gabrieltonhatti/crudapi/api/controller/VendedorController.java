@@ -1,6 +1,5 @@
 package com.gabrieltonhatti.crudapi.api.controller;
 
-import com.gabrieltonhatti.crudapi.api.handleException.Message;
 import com.gabrieltonhatti.crudapi.domain.exception.VendedorException;
 import com.gabrieltonhatti.crudapi.domain.model.Vendedor;
 import com.gabrieltonhatti.crudapi.domain.service.VendedorService;
@@ -8,10 +7,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDateTime;
 
 @RestController
 @AllArgsConstructor
@@ -26,9 +24,9 @@ public class VendedorController {
     }
 
     @PostMapping
-    public ResponseEntity<Vendedor> save(@RequestBody Vendedor vendedor) {
-
-        return ResponseEntity.status(201).body(vendedorService.save(vendedor));
+    @ResponseStatus(HttpStatus.CREATED)
+    public Vendedor save(@RequestBody Vendedor vendedor) {
+        return vendedorService.save(vendedor);
     }
 
     @PutMapping("/{id}")
