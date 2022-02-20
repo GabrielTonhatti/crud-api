@@ -1,10 +1,12 @@
 package com.gabrieltonhatti.crudapi.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @Entity
@@ -16,12 +18,6 @@ public class Vendedor {
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String nome;
-
-    private BigDecimal totalVendas;
-
-    @Column(name = "media_vendas_diarias")
-    private BigDecimal mediaVendas;
 
 }

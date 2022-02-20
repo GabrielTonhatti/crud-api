@@ -6,6 +6,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -19,9 +20,8 @@ public class Venda {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @CreationTimestamp
-    @Column(columnDefinition = "datetime")
-    private LocalDateTime dataVenda;
+    @Column(columnDefinition = "date")
+    private LocalDate dataVenda;
 
     private BigDecimal valor;
 
@@ -29,5 +29,4 @@ public class Venda {
     @JoinColumn(name = "vendedor_id")
     private Vendedor vendedor;
 
-    private String vendedorNome;
 }
