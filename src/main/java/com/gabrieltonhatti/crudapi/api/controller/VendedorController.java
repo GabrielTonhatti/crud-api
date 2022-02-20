@@ -53,9 +53,9 @@ public class VendedorController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id) {
         vendedorService.delete(id);
-        return ResponseEntity.noContent().build();
     }
 
 }

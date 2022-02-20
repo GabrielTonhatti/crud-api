@@ -1,8 +1,8 @@
 package com.gabrieltonhatti.crudapi.infrastructure.repository;
 
 import com.gabrieltonhatti.crudapi.api.dto.VendedorDTO;
+import com.gabrieltonhatti.crudapi.domain.exception.VendedorException;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -31,16 +31,20 @@ public class VendedorRepositoryCustomImpl implements VendedorRepositoryCustom {
 
     @Override
     public VendedorDTO findVendedorById(Long id) {
-        String sql = "SELECT a.* FROM (SELECT v.id, v.nome, COALESCE(AVG(v2.valor), 0) AS mediaVendas, " +
-                "COALESCE(SUM(v2.valor), 0) AS totalVendas FROM vendedores AS v " +
-                " LEFT JOIN vendas AS v2 ON v.id = v2.vendedor_id " +
-                "WHERE v.id = " + id +
-                " GROUP BY v.id, v.nome) AS a";
+        try {
+            String sql = "SELECT a.* FROM (SELECT v.id, v.nome, COALESCE(AVG(v2.valor), 0) AS mediaVendas, " +
+                    "COALESCE(SUM(v2.valor), 0) AS totalVendas FROM vendedores AS v " +
+                    " LEFT JOIN vendas AS v2 ON v.id = v2.vendedor_id " +
+                    "WHERE v.id = " + id +
+                    " GROUP BY v.id, v.nome) AS a";
 
-        System.out.println(sql);
-        List<VendedorDTO> vendedoresDTOS = jdbcTemplate.query(sql, new BeanPropertyRowMapper(VendedorDTO.class));
+            List<VendedorDTO> vendedoresDTOS = jdbcTemplate.query(sql, new BeanPropertyRowMapper(VendedorDTO.class));
 
-        return vendedoresDTOS.get(0);
+            return vendedoresDTOS.get(0);
+
+        } catch (IndexOutOfBoundsException e) {
+            throw new VendedorException(id);
+        }
     }
 
     public int count() {

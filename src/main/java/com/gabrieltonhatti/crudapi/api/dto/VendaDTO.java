@@ -1,6 +1,7 @@
 package com.gabrieltonhatti.crudapi.api.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gabrieltonhatti.crudapi.domain.model.Venda;
 import com.gabrieltonhatti.crudapi.domain.model.Vendedor;
 import lombok.Data;
@@ -10,6 +11,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.Date;
@@ -20,10 +22,11 @@ public class VendaDTO implements Serializable {
 
     private Long id;
 
-    private LocalDateTime dataVenda;
+    private LocalDate dataVenda;
 
     private BigDecimal valor;
 
+    @JsonProperty("vendedor")
     @JsonIgnoreProperties(value = {"totalVendas", "mediaVendas"})
     private VendedorDTO vendedorDTO;
 
