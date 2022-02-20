@@ -5,10 +5,11 @@ import lombok.Getter;
 @Getter
 public enum MessageType {
 
-    RECURSO_NAO_ENCONTRADA("/recurso-nao-encontrada", "Recurso não encontrado");
+    RECURSO_NAO_ENCONTRADA("/recurso-nao-encontrada", "Recurso não encontrado"),
+    RECURSO_EM_USO("/recurso-em-uso", "Recurso em uso");
 
-    private String title;
-    private String uri;
+    private final String title;
+    private final String uri;
 
     MessageType(String path, String title) {
         this.uri = "https://crud-api" + path;

@@ -14,12 +14,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-//@AllArgsConstructor
+@AllArgsConstructor
 public class VendaService {
 
-    @Autowired
     private VendaRepository vendaRepository;
-    @Autowired
     private VendedorService vendedorService;
 
     @Transactional(readOnly = true)

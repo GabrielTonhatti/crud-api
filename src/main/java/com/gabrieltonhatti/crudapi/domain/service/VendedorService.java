@@ -5,6 +5,7 @@ import com.gabrieltonhatti.crudapi.domain.exception.VendedorException;
 import com.gabrieltonhatti.crudapi.domain.model.Vendedor;
 import com.gabrieltonhatti.crudapi.domain.repository.VendaRepository;
 import com.gabrieltonhatti.crudapi.domain.repository.VendedorRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
@@ -13,12 +14,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-//@AllArgsConstructor
+@AllArgsConstructor
 public class VendedorService {
 
-    @Autowired
     private VendedorRepository vendedorRepository;
-    @Autowired
     private VendaRepository vendaRepository;
 
     @Transactional(readOnly = true)
@@ -28,7 +27,7 @@ public class VendedorService {
 
     @Transactional(readOnly = true)
     public VendedorDTO findById(Long id) {
-        return vendedorRepository.calculateAVG(id);
+        return vendedorRepository.findVendedorById(id);
     }
 
     @Transactional
