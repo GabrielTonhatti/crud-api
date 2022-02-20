@@ -27,6 +27,11 @@ public class VendedorController {
         return vendedorService.findAllPageable(page);
     }
 
+    @GetMapping("/{data}")
+    public ResponseEntity<?> findAllTeste(@RequestParam String data, Pageable page) {
+        return vendedorService.findAllPageable(page);
+    }
+
     @GetMapping("/{id}")
     public VendedorDTO fildById(@PathVariable Long id) {
         return vendedorService.findById(id);
