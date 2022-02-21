@@ -22,14 +22,16 @@ public class VendedorController {
 
     private VendedorService vendedorService;
 
-    @GetMapping
-    public Page<VendedorDTO> fildAll(Pageable page) {
-        return vendedorService.findAllPageable(page);
-    }
+//    @GetMapping
+//    public Page<VendedorDTO> fildAll(Pageable page) {
+//        return vendedorService.findAllPageable(page);
+//    }
 
-    @GetMapping("/{data}")
-    public ResponseEntity<?> findAllTeste(@RequestParam String data, Pageable page) {
-        return vendedorService.findAllPageable(page);
+    @GetMapping
+    public Page<VendedorDTO> findAllTeste(@RequestParam(required = false) String data, Pageable page) {
+        System.out.println(data);
+
+        return vendedorService.findAllForData(data, page);
     }
 
     @GetMapping("/{id}")

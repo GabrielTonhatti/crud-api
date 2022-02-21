@@ -24,6 +24,10 @@ public class VendedorService {
         return vendedorRepository.findAllPageable(page);
     }
 
+    public Page<VendedorDTO> findAllForData(String data,Pageable page) {
+        return vendedorRepository.findAllForData(data, page);
+    }
+
     public VendedorDTO findById(Long id) {
         return vendedorRepository.findVendedorById(id);
     }
