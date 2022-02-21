@@ -7,5 +7,6 @@ import org.springframework.data.domain.Pageable;
 public interface VendedorRepositoryCustom {
 
     Page<VendedorDTO> findAllPageable(Pageable page);
+    Page<VendedorDTO> findAllForData(String data, Pageable page);
     VendedorDTO findVendedorById(Long id);
 }

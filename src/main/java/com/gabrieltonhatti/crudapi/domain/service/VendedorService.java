@@ -4,7 +4,6 @@ import com.gabrieltonhatti.crudapi.api.dto.VendedorDTO;
 import com.gabrieltonhatti.crudapi.domain.exception.EntidadeEmUsoExpcetion;
 import com.gabrieltonhatti.crudapi.domain.exception.VendedorException;
 import com.gabrieltonhatti.crudapi.domain.model.Vendedor;
-import com.gabrieltonhatti.crudapi.domain.repository.VendaRepository;
 import com.gabrieltonhatti.crudapi.domain.repository.VendedorRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -12,7 +11,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @AllArgsConstructor
@@ -24,6 +22,10 @@ public class VendedorService {
 
     public Page<VendedorDTO> findAllPageable(Pageable page) {
         return vendedorRepository.findAllPageable(page);
+    }
+
+    public Page<VendedorDTO> findAllForData(String data,Pageable page) {
+        return vendedorRepository.findAllForData(data, page);
     }
 
     public VendedorDTO findById(Long id) {
@@ -47,7 +49,6 @@ public class VendedorService {
         } catch (EmptyResultDataAccessException e) {
             throw new VendedorException(id);
         } catch (DataIntegrityViolationException e) {
-            System.out.println("TESTE");
             throw new EntidadeEmUsoExpcetion(
                     String.format(MSG_VENDEDOR_EM_USO, id)
             );
