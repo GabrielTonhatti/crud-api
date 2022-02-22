@@ -5,6 +5,10 @@ import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -23,6 +27,8 @@ public class Venda {
     @Column(columnDefinition = "date")
     private LocalDate dataVenda;
 
+    @NotNull(message = "O valor é obrigatório")
+    @PositiveOrZero(message = "O valor da venda deve ser um valor positivo")
     private BigDecimal valor;
 
     @ManyToOne

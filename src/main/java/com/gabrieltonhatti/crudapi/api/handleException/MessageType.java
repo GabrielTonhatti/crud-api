@@ -7,7 +7,8 @@ public enum MessageType {
 
     RECURSO_NAO_ENCONTRADA("/recurso-nao-encontrada", "Recurso não encontrado"),
     ENTIDADE_EM_USO("/entidade-em-uso", "Entidade em uso"),
-    ERRO_NEGOCIO("/erro-negocio", "Violação de regra de Negócio");
+    ERRO_NEGOCIO("/erro-negocio", "Violação de regra de Negócio"),
+    DADOS_INVALIDOS("/dados-invalidos", "Dados inválidos");
 
     private final String title;
     private final String uri;

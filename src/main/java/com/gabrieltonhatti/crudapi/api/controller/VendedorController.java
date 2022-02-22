@@ -5,6 +5,8 @@ import com.gabrieltonhatti.crudapi.domain.exception.VendedorException;
 import com.gabrieltonhatti.crudapi.domain.model.Vendedor;
 import com.gabrieltonhatti.crudapi.domain.service.VendedorService;
 import lombok.AllArgsConstructor;
+import lombok.Value;
+import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -22,15 +25,8 @@ public class VendedorController {
 
     private VendedorService vendedorService;
 
-//    @GetMapping
-//    public Page<VendedorDTO> fildAll(Pageable page) {
-//        return vendedorService.findAllPageable(page);
-//    }
-
     @GetMapping
-    public Page<VendedorDTO> findAllTeste(@RequestParam(required = false) String data, Pageable page) {
-        System.out.println(data);
-
+    public Page<VendedorDTO> findAllTeste(@RequestParam(required = false) String data, @ParameterObject Pageable page) {
         return vendedorService.findAllForData(data, page);
     }
 
@@ -41,12 +37,12 @@ public class VendedorController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public VendedorDTO save(@RequestBody Vendedor vendedor) {
+    public VendedorDTO save(@RequestBody @Valid Vendedor vendedor) {
         return vendedorService.save(vendedor);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<VendedorDTO> update(@PathVariable Long id, @RequestBody Vendedor vendedor) {
+    public ResponseEntity<VendedorDTO> update(@PathVariable Long id, @RequestBody @Valid Vendedor vendedor) {
         Vendedor vendedorAtual = vendedorService.findOrThrowException(id);
 
         BeanUtils.copyProperties(vendedor, vendedorAtual, "id");

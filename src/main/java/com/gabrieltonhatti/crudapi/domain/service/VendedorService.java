@@ -12,6 +12,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.validation.ConstraintViolationException;
+
 @Service
 @AllArgsConstructor
 public class VendedorService {
@@ -19,10 +21,6 @@ public class VendedorService {
     public static final String MSG_VENDEDOR_EM_USO = "O vendedor de código %d não pode ser removida, pois tem " +
             "vendas registradas no sistema!";
     private VendedorRepository vendedorRepository;
-
-    public Page<VendedorDTO> findAllPageable(Pageable page) {
-        return vendedorRepository.findAllPageable(page);
-    }
 
     public Page<VendedorDTO> findAllForData(String data,Pageable page) {
         return vendedorRepository.findAllForData(data, page);
@@ -33,14 +31,14 @@ public class VendedorService {
     }
 
     public VendedorDTO save(Vendedor vendedor) {
-        VendedorDTO vendedorDTO = new VendedorDTO(vendedorRepository.save(vendedor));
-        if (vendedor.getId() != null) {
-            VendedorDTO vendedorDTOAtual = vendedorRepository.findVendedorById(vendedor.getId());
-            vendedorDTOAtual.setNome(vendedorDTO.getNome());
+            VendedorDTO vendedorDTO = new VendedorDTO(vendedorRepository.save(vendedor));
+            if (vendedor.getId() != null) {
+                VendedorDTO vendedorDTOAtual = vendedorRepository.findVendedorById(vendedor.getId());
+                vendedorDTOAtual.setNome(vendedorDTO.getNome());
 
-            return vendedorDTOAtual;
-        }
-        return vendedorRepository.findVendedorById(vendedor.getId());
+                return vendedorDTOAtual;
+            }
+            return vendedorRepository.findVendedorById(vendedor.getId());
     }
 
     public void delete(Long id) {

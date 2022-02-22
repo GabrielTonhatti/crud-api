@@ -5,13 +5,17 @@ import com.gabrieltonhatti.crudapi.domain.exception.NegocioException;
 import com.gabrieltonhatti.crudapi.domain.exception.VendaException;
 import com.gabrieltonhatti.crudapi.domain.model.Venda;
 import com.gabrieltonhatti.crudapi.domain.service.VendaService;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.AllArgsConstructor;
+import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @AllArgsConstructor
@@ -21,7 +25,7 @@ public class VendaController {
     private VendaService vendaService;
 
     @GetMapping
-    public ResponseEntity<Page<VendaDTO>> findAll(Pageable page) {
+    public ResponseEntity<Page<VendaDTO>> findAll(@ParameterObject Pageable page) {
         return ResponseEntity.ok(vendaService.findAll(page));
     }
 
@@ -31,7 +35,7 @@ public class VendaController {
     }
 
     @PostMapping
-    public ResponseEntity<VendaDTO> save(@RequestBody Venda venda) {
+    public ResponseEntity<VendaDTO> save(@RequestBody @Valid Venda venda) {
         try {
             return ResponseEntity.status(201).body(vendaService.save(venda));
         } catch (VendaException e) {
@@ -40,7 +44,7 @@ public class VendaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<VendaDTO> update(@PathVariable Long id, @RequestBody Venda venda) {
+    public ResponseEntity<VendaDTO> update(@PathVariable Long id, @RequestBody @Valid Venda venda) {
         Venda vendaAtual = vendaService.findOrThrowException(id);
 
         BeanUtils.copyProperties(venda, vendaAtual, "id");
