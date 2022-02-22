@@ -3,3 +3,20 @@ spring:
     active: ${APP_PROFILE:test}
   jpa:
     open-in-view: false
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+    throw-exception-if-no-handler-found: true
+  web:
+    resources:
+      add-mappings: false
+  springdoc:
+    swagger-ui:
+      disable-swagger-default-url: 'true'
+      enabled: 'true'
+      path: /swagger-ui.html
+      tagsSorter: alpha
+  jackson:
+    deserialization:
+      fail-on-ignored-properties: true
+      fail-on-unknown-properties: true
