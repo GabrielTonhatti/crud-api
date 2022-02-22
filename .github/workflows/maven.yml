@@ -4,16 +4,9 @@
 name: Java CI with Maven
 
 on:
-  push:
-    branches:
-      - main
-    branches-ignore:
-      - 'feature/**'
   pull_request:
     branches:
       - main
-    branches-ignore:
-      - 'feature/**'
 
 jobs:
   build:
