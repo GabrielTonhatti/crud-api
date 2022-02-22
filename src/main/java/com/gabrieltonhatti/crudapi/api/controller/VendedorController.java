@@ -5,10 +5,8 @@ import com.gabrieltonhatti.crudapi.domain.exception.VendedorException;
 import com.gabrieltonhatti.crudapi.domain.model.Vendedor;
 import com.gabrieltonhatti.crudapi.domain.service.VendedorService;
 import lombok.AllArgsConstructor;
-import lombok.Value;
 import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -16,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @AllArgsConstructor

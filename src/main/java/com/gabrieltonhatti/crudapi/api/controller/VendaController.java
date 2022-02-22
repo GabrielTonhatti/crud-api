@@ -5,7 +5,6 @@ import com.gabrieltonhatti.crudapi.domain.exception.NegocioException;
 import com.gabrieltonhatti.crudapi.domain.exception.VendaException;
 import com.gabrieltonhatti.crudapi.domain.model.Venda;
 import com.gabrieltonhatti.crudapi.domain.service.VendaService;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.AllArgsConstructor;
 import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.BeanUtils;
