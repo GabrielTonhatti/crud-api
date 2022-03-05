@@ -5,6 +5,7 @@ import com.gabrieltonhatti.crudapi.domain.exception.NegocioException;
 import com.gabrieltonhatti.crudapi.domain.exception.VendaException;
 import com.gabrieltonhatti.crudapi.domain.model.Venda;
 import com.gabrieltonhatti.crudapi.domain.service.VendaService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.BeanUtils;
@@ -19,6 +20,7 @@ import javax.validation.Valid;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/vendas")
+@Tag(name = "Vendas", description = "Rotas da API para Vendas")
 public class VendaController {
 
     private VendaService vendaService;

@@ -4,6 +4,7 @@ import com.gabrieltonhatti.crudapi.api.dto.VendedorDTO;
 import com.gabrieltonhatti.crudapi.domain.exception.VendedorException;
 import com.gabrieltonhatti.crudapi.domain.model.Vendedor;
 import com.gabrieltonhatti.crudapi.domain.service.VendedorService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.BeanUtils;
@@ -18,6 +19,7 @@ import javax.validation.Valid;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/vendedores")
+@Tag(name = "Vendedores", description = "Rotas da API para Vendores")
 public class VendedorController {
 
     private VendedorService vendedorService;
